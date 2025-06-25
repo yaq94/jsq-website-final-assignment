@@ -1,0 +1,1554 @@
+/*
+  "东营之窗" 网站 3.0 版本 - 全局样式表
+  核心设计理念: 动态叙事美学 (Dynamic Narrative Aesthetics)
+*/
+
+:root {
+    /* 色彩体系 (Light Theme) */
+    --primary-color: #2A9D8F;
+    --accent-color: #F4A261;
+    --background-l1: #F8F9FA;
+    --background-l2: #FFFFFF;
+    --text-primary: #212529;
+    --text-secondary: #6C757D;
+    --border-color: #DEE2E6;
+    --link-color: #0D6EFD;
+    --success-color: #198754;
+    --error-color: #DC3545;
+
+    /* 版式与间距 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    --border-radius: 8px;
+
+    /* 动效 */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] {
+    --primary-color: #2A9D8F; /* 主色在暗色模式下可保持或微调 */
+    --accent-color: #F4A261;
+    --background-l1: #121212;
+    --background-l2: #1E1E1E;
+    --text-primary: #EAEAEA;
+    --text-secondary: #A0A0A0;
+    --border-color: #333333;
+    --link-color: #58A6FF;
+}
+
+/* --- 全局重置与基础设定 --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: var(--text-primary);
+    background-color: var(--background-l1);
+    margin: 0;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: var(--spacing-xxl) var(--spacing-lg);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--primary-color);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* --- 导航栏 (保持2.0样式不变) --- */
+/* The user requested to keep the navigation bar as is. */
+/* Styles for .main-header, .nav-bar, .nav-logo, .nav-links will be preserved. */
+.main-header {
+    background-color: var(--background-l2);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-fast);
+}
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.nav-logo a {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-lg);
+    margin: 0;
+    padding: 0;
+}
+.nav-links a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: var(--spacing-sm) 0;
+    position: relative;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width var(--transition-fast);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+/* --- 英雄区 Hero Section --- */
+.hero {
+    color: white;
+    text-align: center;
+    padding: 6rem 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero h1 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+.hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+}
+.hero-animated .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    animation: kenburns 20s ease-out infinite;
+    z-index: 1;
+}
+.hero > div {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes kenburns {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* --- 内容卡片 Card --- */
+.card {
+    display: block;
+    background-color: var(--background-l2);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    border: 1px solid var(--border-color);
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+.card-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.card-content {
+    padding: var(--spacing-lg);
+}
+.card-content h3 {
+    margin-top: 0;
+}
+
+/* --- 动画 Animation --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s var(--transition-smooth) forwards;
+}
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 其他所有组件的旧样式将被逐步替换 --- */
+/* (此处省略了tabs, timeline, slider, filter-gallery, guestbook等旧样式，它们将在各自页面改造时被重写或移除) */
+
+/*
+==========================================================================
+  新版首页 (INDEX.JSP V2.0) 专属样式
+==========================================================================
+*/
+
+/* --- 通用分区头部 --- */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* --- 1. 动态页头 (Hero Dynamic) --- */
+.hero-dynamic {
+    color: white;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 4rem 1rem;
+}
+.hero-dynamic .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    animation: kenburns 20s ease-out infinite;
+    z-index: -1;
+}
+.hero-dynamic h1 {
+    font-size: 3.5rem;
+    color: white;
+    font-weight: 900;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+}
+.hero-dynamic .subtitle {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: var(--spacing-md) auto 0;
+    line-height: 1.8;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+}
+
+/* --- 2. 核心特色筛选网格 (Filtered Grid) --- */
+.filtered-grid-section .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+.filtered-grid-section .card {
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+}
+/* 用于JS交互的隐藏样式 */
+.filtered-grid-section .card.hidden {
+    transform: scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+}
+.filtered-grid-section .card p {
+    flex-grow: 1;
+    max-height: 150px; /* 设定一个固定的最大高度 */
+    overflow-y: hidden;  /* 默认隐藏溢出的内容 */
+    position: relative;
+    transition: max-height var(--transition-smooth); /* 为高度变化添加过渡 */
+    scrollbar-width: thin; /* Firefox 滚动条样式 */
+    scrollbar-color: var(--accent-color) var(--background-l1); /* Firefox 滚动条颜色 */
+}
+
+/* 底部渐变遮罩，提示有更多内容 */
+.filtered-grid-section .card p::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to top, var(--background-l2), transparent);
+    pointer-events: none; /* 允许鼠标事件穿透 */
+    transition: opacity var(--transition-fast);
+}
+
+/* 鼠标悬停在卡片上时的效果 */
+.filtered-grid-section .card:hover p {
+    max-height: 300px; /* 增大最大高度以容纳更多内容 */
+    overflow-y: auto;  /* 变为可滚动 */
+}
+
+/* 悬停时隐藏遮罩 */
+.filtered-grid-section .card:hover p::after {
+    opacity: 0;
+}
+
+/* 自定义Webkit浏览器（Chrome, Safari）的滚动条样式 */
+.filtered-grid-section .card p::-webkit-scrollbar {
+    width: 8px;
+}
+.filtered-grid-section .card p::-webkit-scrollbar-track {
+    background: var(--background-l1);
+    border-radius: var(--border-radius);
+}
+.filtered-grid-section .card p::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--background-l1);
+}
+
+/* --- 3. 交互式历史时间轴 (Timeline) --- */
+.timeline-section {
+    background-color: var(--background-l2);
+}
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) 0;
+}
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--border-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+.timeline-item {
+    padding: var(--spacing-md) var(--spacing-xl);
+    position: relative;
+    width: 50%;
+}
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: var(--background-l2);
+    border: 4px solid var(--primary-color);
+    top: 32px;
+    border-radius: 50%;
+    z-index: 1;
+    transition: transform var(--transition-smooth), background-color var(--transition-smooth);
+}
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+.timeline-item:nth-child(even)::after {
+    left: -10px;
+}
+.timeline-content {
+    padding: var(--spacing-lg);
+    background-color: var(--background-l1);
+    border-radius: var(--border-radius);
+    position: relative;
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+}
+.timeline-item.in-view .timeline-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+.timeline-item.in-view::after {
+    transform: scale(1.2);
+    background-color: var(--accent-color);
+}
+.timeline-content h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+
+/* --- 4. 四季切换选项卡 (Seasonal Tabs) --- */
+.seasonal-tabs-section {
+    background-color: var(--background-l1);
+}
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
+}
+.tab-button {
+    padding: var(--spacing-md) var(--spacing-lg);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+.tab-button:hover {
+    color: var(--primary-color);
+}
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--accent-color);
+}
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.6s;
+}
+.tab-pane.active {
+    display: block;
+}
+
+/* --- 5. 城市故事轮播 (Story Carousel) --- */
+.story-carousel-section {
+    background-color: var(--background-l2);
+    position: relative;
+}
+.story-carousel {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+.story-card {
+    display: none;
+    animation: fadeIn 0.8s;
+}
+.story-card.active {
+    display: block;
+}
+.story-card h4 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+.story-card p {
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+.story-card .story-author {
+    margin-top: var(--spacing-lg);
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+
+/* --- 6. 动态数字统计 (Counters) --- */
+.counters-section {
+    background-color: var(--primary-color);
+    color: white;
+}
+.counters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+    text-align: center;
+}
+.counter-item .counter {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+.counter-item h4 {
+    font-size: 1.1rem;
+    margin-top: var(--spacing-sm);
+    color: white;
+    opacity: 0.9;
+}
+.counter-item p {
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0.7;
+}
+
+/* --- 7. 增强图片画廊 (Photo Gallery) --- */
+.photo-gallery-section {
+    background: var(--background-l1);
+}
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+.photo-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.photo-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* --- 灯箱 (Lightbox) --- */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-smooth);
+}
+.lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    transform: scale(0.8);
+    transition: transform var(--transition-smooth);
+}
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+.lightbox-close {
+    position: absolute;
+    top: var(--spacing-xl);
+    right: var(--spacing-xl);
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+#lightbox-caption {
+    color: white;
+    text-align: center;
+    margin-top: var(--spacing-md);
+    position: absolute;
+    bottom: 5vh;
+}
+
+/* --- 页脚 Footer --- */
+.main-footer {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background-color: var(--background-l2);
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-xxl);
+    color: var(--text-secondary);
+}
+.footer-content-wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--spacing-lg);
+}
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+.theme-toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+.theme-toggle-btn .icon {
+    width: 20px;
+    height: 20px;
+}
+/* Hide one of the icons based on the theme */
+[data-theme='light'] .icon-moon { display: block; }
+[data-theme='light'] .icon-sun { display: none; }
+[data-theme='dark'] .icon-moon { display: none; }
+[data-theme='dark'] .icon-sun { display: block; }
+
+/* --- Interest Navigator (Homepage v3.0) --- */
+.interest-navigator {
+    padding: var(--spacing-xl) 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-l2);
+}
+
+.interest-navigator h2 {
+    margin-top: 0;
+}
+
+.interest-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.interest-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.interest-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--background-l2);
+    transform: translateY(-2px);
+}
+
+.interest-btn.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--background-l2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+@keyframes bounce-horizontal {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(10px);
+    }
+    60% {
+        transform: translateX(5px);
+    }
+}
+
+/* --- Interactive Philosophy Scroll (Suntzu Page v3.0) --- */
+.philosophy-scroll-container {
+    max-width: 900px;
+    margin: var(--spacing-xxl) auto;
+    background-color: #FDFBF5; /* A paper-like color */
+    padding: var(--spacing-xxl) var(--spacing-xl);
+    border: 1px solid #EAE0C8;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+[data-theme='dark'] .philosophy-scroll-container {
+    background-color: #2c2a24;
+    border-color: #4a463a;
+}
+
+/* Simulating the scroll rollers (axles) */
+.philosophy-scroll-container::before,
+.philosophy-scroll-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513); /* Wood-like gradient */
+    border: 2px solid #5C2F0E;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.philosophy-scroll-container::before {
+    top: -42px;
+}
+
+.philosophy-scroll-container::after {
+    bottom: -42px;
+}
+
+.scroll-title-section {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.scroll-title-section h1 {
+    font-family: 'KaiTi', 'STKaiti', 'serif'; /* Using a more traditional font if available */
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    color: #8B4513;
+}
+
+[data-theme='dark'] .scroll-title-section h1 {
+     color: #D2B48C; /* Tan */
+}
+
+.principle-block {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    padding-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.principle-block:last-child {
+    border-bottom: none;
+}
+
+.principle-block.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.principle-block h3 {
+    font-family: 'FangSong', 'STFangsong', 'serif';
+    color: var(--primary-color);
+    font-size: var(--font-size-h3);
+    margin-bottom: var(--spacing-md);
+    font-weight: bold;
+}
+
+[data-theme='dark'] .principle-block h3 {
+    color: var(--accent-color);
+}
+
+/* --- Data-Driven Time Narrative (Oilcity Page v3.0) --- */
+.time-narrative-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxl);
+}
+
+@media (min-width: 992px) {
+    .time-narrative-container {
+        flex-direction: row;
+    }
+}
+
+.narrative-column {
+    flex: 1;
+    min-width: 0; /* Prevents flexbox overflow */
+}
+
+.chart-column {
+    flex: 1;
+    position: sticky;
+    top: 120px; /* Position under the nav bar */
+    height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.narrative-block {
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xxl);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-lg);
+    transition: background-color var(--transition-slow), border-color var(--transition-slow);
+}
+
+.narrative-block.is-active {
+    background-color: var(--background-l2);
+    border-color: var(--border-color);
+}
+
+.chart-container {
+    width: 100%;
+    height: 350px;
+    background-color: var(--background-l2);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-xl);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: flex-end; /* Bars grow from the bottom */
+    justify-content: space-around;
+    gap: 2%;
+}
+
+.chart-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.chart-bar {
+    width: 100%;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    height: 0; /* Initial height */
+    transition: height 1s ease-in-out;
+    position: relative;
+}
+
+.chart-bar.is-active {
+    background-color: var(--accent-color);
+}
+
+.chart-bar .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-primary);
+    color: var(--background-l1);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.chart-bar.is-active .tooltip {
+    opacity: 1;
+}
+
+.chart-label {
+    margin-top: var(--spacing-sm);
+    font-size: 0.85em;
+    font-weight: bold;
+    color: var(--text-secondary);
+}
+
+.chart-title {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+.chart-title h3 {
+    margin: 0;
+}
+.chart-title p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 0;
+    min-height: 1.5em; /* Prevent layout shift */
+}
+
+/* --- Seasons Explorer (Wetland Page v3.0) --- */
+.seasons-explorer {
+    --season-spring-bg: #E3F2FD;
+    --season-summer-bg: #E8F5E9;
+    --season-autumn-bg: #FFF8E1;
+    --season-winter-bg: #F5F5F5;
+
+    --season-spring-accent: #29B6F6;
+    --season-summer-accent: #66BB6A;
+    --season-autumn-accent: #FFA726;
+    --season-winter-accent: #B0BEC5;
+    
+    transition: background-color var(--transition-slow);
+}
+
+.seasonal-hero {
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--spacing-xxl);
+}
+
+.seasonal-hero h1 {
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    font-size: clamp(3rem, 6vw, 5rem);
+}
+
+.season-controls {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    background-color: var(--background-l2);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.season-btn {
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    margin: 0 var(--spacing-sm);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.season-btn.active {
+    color: #fff;
+}
+.season-btn[data-season="spring"].active { background-color: var(--season-spring-accent); border-color: var(--season-spring-accent); }
+.season-btn[data-season="summer"].active { background-color: var(--season-summer-accent); border-color: var(--season-summer-accent); }
+.season-btn[data-season="autumn"].active { background-color: var(--season-autumn-accent); border-color: var(--season-autumn-accent); }
+.season-btn[data-season="winter"].active { background-color: var(--season-winter-accent); border-color: var(--season-winter-accent); }
+
+
+.seasonal-content-wrapper {
+    position: relative;
+    padding-top: var(--spacing-xl);
+}
+
+.seasonal-content {
+    display: none; /* Hidden by default */
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+.seasonal-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- Flavor Map (Cuisine Page v3.0) --- */
+.flavor-map-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+@media (min-width: 992px) {
+    .flavor-map-container {
+        flex-direction: row;
+    }
+}
+
+.map-svg-wrapper {
+    flex-basis: 50%;
+    position: relative;
+}
+
+.cuisine-map-svg {
+    width: 100%;
+    height: auto;
+    stroke: var(--border-color);
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.cuisine-map-svg .region {
+    fill: var(--background-l2);
+    transition: fill var(--transition-fast), transform var(--transition-fast);
+    cursor: pointer;
+}
+
+.cuisine-map-svg .region:hover {
+    fill: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.cuisine-map-svg .region.active {
+    fill: var(--primary-color);
+}
+
+.map-tooltip {
+    position: absolute;
+    background-color: var(--text-primary);
+    color: var(--background-l1);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    pointer-events: none; /* So it doesn't interfere with mouse events on the SVG */
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    z-index: 10;
+}
+
+.cuisine-content-column {
+    flex-basis: 50%;
+}
+
+.cuisine-content {
+    display: none;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+}
+
+.cuisine-content.active {
+    display: block;
+}
+
+.cuisine-content h3 {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* --- Guestbook Page v3.0 --- */
+.guestbook-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+}
+
+@media (min-width: 992px) {
+    .guestbook-grid {
+        grid-template-columns: 1fr 1.2fr;
+    }
+}
+
+.guestbook-intro-card {
+    background: var(--background-l2);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+}
+
+.guestbook-form-container, .guestbook-messages-container {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.guestbook-form .form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.guestbook-form .form-control {
+    width: 100%;
+    padding: var(--spacing-md);
+    background-color: var(--background-l2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.guestbook-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-color-translucent);
+    outline: none;
+}
+
+.guestbook-form .form-control.is-invalid {
+    border-color: var(--danger-color);
+}
+
+.form-error-message {
+    font-size: 0.875rem;
+    color: var(--danger-color);
+    margin-top: var(--spacing-sm);
+    display: none;
+}
+
+.form-control.is-invalid + .form-error-message {
+    display: block;
+}
+
+.guestbook-form .submit-btn {
+    width: 100%;
+    position: relative;
+}
+
+.submit-btn .btn-text {
+    transition: opacity var(--transition-fast);
+}
+
+.submit-btn.is-loading .btn-text {
+    opacity: 0;
+}
+
+.submit-btn .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.submit-btn.is-loading .loader {
+    opacity: 1;
+}
+
+.message-card {
+    background: var(--background-l1);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInDown 0.6s forwards;
+}
+
+.message-card h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--accent-color-alt);
+    margin-bottom: var(--spacing-sm);
+}
+
+.message-card small {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/*
+==========================================================================
+  黄河入海口 (ESTUARY.JSP V2.0) 专属样式
+==========================================================================
+*/
+
+/* --- 1. 全屏视频页头 --- */
+.hero-video-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.hero-video-section .hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 900px;
+    padding: var(--spacing-lg);
+}
+
+.hero-video-section h1 {
+    font-size: 3.5rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+.hero-video-section .subtitle {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-top: var(--spacing-md);
+}
+
+.scroll-down-prompt {
+    position: absolute;
+    bottom: var(--spacing-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -15px);
+    }
+    60% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+/* --- 2. 奇观滚动叙事 --- */
+.wonder-section {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--background-l2);
+}
+
+.wonder-sticky-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxl);
+}
+
+.wonder-image-pane {
+    position: sticky;
+    top: 120px; /* 留出导航栏高度 */
+    height: calc(100vh - 180px);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.wonder-image-pane img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wonder-text-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15vh; /* 文本块之间的距离 */
+}
+
+.wonder-text-block {
+    padding: var(--spacing-lg);
+    max-width: 600px; /* 提升阅读性 */
+    margin: 0 auto;
+}
+
+.wonder-text-block h2 { font-size: 2.2rem; }
+.wonder-text-block h3 { font-size: 1.5rem; color: var(--accent-color); }
+.wonder-text-block p { color: var(--text-secondary); line-height: 1.8; }
+
+@media (min-width: 992px) {
+    .wonder-sticky-container {
+        flex-direction: row;
+    }
+    .wonder-image-pane {
+        flex: 1;
+    }
+    .wonder-text-pane {
+        flex: 1;
+    }
+}
+
+/* --- 3. 交互式科学剖面图 --- */
+.science-diagram-section {
+    background-color: var(--background-l1);
+    padding: var(--spacing-xxl) 0;
+}
+
+.diagram-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.diagram-svg-wrapper {
+    background-color: var(--background-l2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+}
+
+#estuary-diagram {
+    width: 100%;
+    height: auto;
+}
+
+#estuary-diagram .diagram-path {
+    transition: opacity var(--transition-fast);
+}
+#estuary-diagram .water-sea { fill: #A8DADC; }
+#estuary-diagram .water-river { fill: #E9C46A; }
+#estuary-diagram .water-mix { fill: #9BBD95; }
+
+#estuary-diagram .diagram-hotspot circle {
+    fill: rgba(255, 255, 255, 0.3);
+    stroke: white;
+    stroke-width: 2;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+#estuary-diagram .diagram-hotspot:hover circle {
+    fill: rgba(255, 255, 255, 0.7);
+    r: 25;
+}
+
+.diagram-info-pane .diagram-info-card {
+    display: none;
+    padding: var(--spacing-lg);
+    background: var(--background-l2);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+.diagram-info-pane .diagram-info-card.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+.diagram-info-pane h4 { margin-top: 0; }
+
+@media (min-width: 768px) {
+    .diagram-container {
+        flex-direction: row;
+        gap: var(--spacing-xl);
+    }
+    .diagram-svg-wrapper { flex: 2; }
+    .diagram-info-pane { flex: 1; }
+}
+
+/* --- 4. 生态万象画廊 --- */
+.eco-gallery-section {
+    background-color: var(--background-l2);
+    padding: var(--spacing-xxl) 0;
+}
+
+.eco-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.eco-card {
+    background-color: transparent;
+    aspect-ratio: 1 / 1;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.eco-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: var(--border-radius);
+}
+
+.eco-card:hover .eco-card-inner {
+    transform: rotateY(180deg);
+    }
+
+.eco-card-front, .eco-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.eco-card-front {
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+.eco-card-front h4 {
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-shadow: 1px 1px 4px black;
+}
+
+.eco-card-back {
+    background-color: var(--primary-color);
+    color: white;
+    transform: rotateY(180deg);
+    padding: var(--spacing-md);
+}
+.eco-card-back h4 { color: white; margin-bottom: var(--spacing-sm); }
+.eco-card-back p { color: rgba(255,255,255,0.9); font-size: 0.9rem; }
+
+
+/* --- 5. 观景指南 (手风琴) --- */
+.guide-section {
+    background-color: var(--background-l1);
+    padding: var(--spacing-xxl) 0;
+}
+
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    background-color: var(--background-l2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+    overflow: hidden;
+}
+.accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-header {
+    width: 100%;
+    background-color: var(--background-l2);
+    border: none;
+    padding: var(--spacing-lg);
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-header:hover {
+    background-color: #f1f1f1;
+}
+
+.accordion-header::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    transition: transform var(--transition-smooth);
+}
+.accordion-header.active::after {
+    transform: rotate(45deg);
+}
+
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-smooth), padding var(--transition-smooth);
+    padding: 0 var(--spacing-lg);
+}
+
+.accordion-content p {
+    margin: 0;
+    padding: var(--spacing-md) 0;
+}
+
+/* --- 6. 文化回响 --- */
+.culture-section {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--background-l2);
+}
+
+.culture-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.culture-content blockquote {
+    border: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-lg) 0;
+}
+
+.culture-content blockquote p {
+    font-size: 1.8rem;
+    font-family: 'KaiTi', 'STKaiti', serif;
+    font-style: italic;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.culture-content blockquote footer {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.culture-content > p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+} 

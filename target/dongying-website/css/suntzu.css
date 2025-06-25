@@ -1,0 +1,639 @@
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+
+/* src/main/webapp/css/suntzu.css */
+/* This file will contain all the specific styles for the redesigned suntzu.jsp page. */
+
+/* === suntzu.css === */
+
+/* --- General Page Layout --- */
+#suntzu-main {
+    --suntzu-primary-color: #8a705a; /* A sophisticated brown, like old bamboo */
+    --suntzu-secondary-color: #3d342e; /* Darker brown for text */
+    --suntzu-bg-color: #f5f3ef; /* A very light, paper-like beige */
+    --suntzu-accent-color: #c84b31; /* A muted red for accents */
+    --border-radius-main: 8px;
+    font-family: 'Georgia', 'serif'; /* Using a serif font for a classic feel */
+}
+
+body {
+    background-color: var(--suntzu-bg-color);
+}
+
+.suntzu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+#suntzu-main section {
+    margin-bottom: 4.5rem; /* Reduced spacing for a more compact layout */
+    padding: 3rem 2rem; /* Add padding to sections for background color */
+    border-radius: var(--border-radius-main);
+    transition: background-color 0.3s ease;
+}
+
+/* Alternating background colors for sections */
+#suntzu-main section:nth-of-type(even) {
+    background-color: #fff;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.03);
+}
+
+/* Reduce margin for the very last section to tighten space with footer */
+#suntzu-main section:last-of-type {
+    margin-bottom: 2rem;
+}
+
+#suntzu-main h2 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--suntzu-secondary-color);
+    margin-bottom: 3.5rem; /* Reduced spacing after title */
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 1.5rem;
+    font-family: 'Ma Shan Zheng', cursive;
+}
+
+/* Scroll-end-like decorations for the title underline */
+#suntzu-main h2::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 120px;
+    height: 3px;
+    background-color: var(--suntzu-primary-color);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(138, 112, 90, 0.3);
+}
+
+#suntzu-main h2::after,
+#suntzu-main h2 .title-decoration {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    width: 8px;
+    height: 11px;
+    background-color: var(--suntzu-primary-color);
+    border-radius: 2px;
+}
+
+#suntzu-main h2::after {
+    left: 50%;
+    transform: translateX(calc(-60px - 8px));
+}
+
+#suntzu-main h2 .title-decoration {
+    left: 50%;
+    transform: translateX(60px);
+}
+
+/* --- Redesigned Intro Section --- */
+.page-intro {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 8rem; /* Give it ample space before the first section */
+    padding: 2rem;
+}
+
+.intro-image-container {
+    flex: 0 0 300px; /* Fixed width for the image container */
+    height: 400px;
+}
+
+.intro-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.intro-image-container img:hover {
+    transform: scale(1.05);
+}
+
+.intro-text-container {
+    flex: 1;
+}
+
+/* Override the centered h2 for this section */
+.page-intro h2 {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+/* Remove the shared pseudo-element styles for this specific h2 */
+.page-intro h2::before,
+.page-intro h2::after,
+.page-intro h2 .title-decoration {
+    display: none;
+}
+
+.intro-quote {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--suntzu-secondary-color);
+    border-left: 5px solid var(--suntzu-primary-color);
+    background-color: #fff;
+    border-radius: 0 var(--border-radius-main) var(--border-radius-main) 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+/* --- Module 1: Hero Section --- */
+#suntzu-hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+#suntzu-hero .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/孙子兵法.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transform: scale(1.1);
+    transition: transform 6s ease-out;
+}
+
+#suntzu-hero .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 2s ease-out;
+}
+
+#suntzu-hero .hero-title {
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+#suntzu-hero .hero-subtitle {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+.scroll-down-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -20px); }
+    60% { transform: translate(-50%, -10px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Module 2: 13 Chapters --- */
+#suntzu-chapters {
+    padding: 2rem 0;
+}
+
+.bamboo-scroll-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.bamboo-scroll-wrapper {
+    overflow: hidden;
+    width: 80%;
+    margin: 0 1rem;
+}
+
+.bamboo-scroll {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    cursor: grab;
+}
+
+.bamboo-slip {
+    flex: 0 0 auto;
+    padding: 2rem 1.5rem;
+    margin: 0 5px;
+    background-color: #d4c5a3;
+    border-left: 1px solid #bca98f;
+    border-right: 1px solid #bca98f;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 1.4rem;
+    color: var(--suntzu-secondary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    /* Reset button styles */
+    border-top: none;
+    border-bottom: none;
+    font-family: inherit;
+}
+
+.bamboo-slip:focus-visible {
+    outline: 3px solid var(--suntzu-accent-color);
+    outline-offset: 3px;
+}
+
+.bamboo-slip:hover {
+    background-color: #c7b899;
+    transform: translateY(-5px);
+}
+
+.bamboo-slip.active {
+    background-color: var(--suntzu-primary-color);
+    color: #fff;
+    transform: translateY(-10px);
+}
+
+.scroll-arrow {
+    font-size: 2rem;
+    color: var(--suntzu-primary-color);
+    cursor: pointer;
+    user-select: none;
+    padding: 0 1rem;
+}
+
+#chapter-details-container {
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #e0d9cd;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    min-height: 200px;
+}
+
+.chapter-content {
+    /* animation: fadeIn 0.5s ease; */ /* Replaced with more controlled animation */
+}
+
+.chapter-content p {
+    font-size: 1.1rem;
+    line-height: 2; /* Increased line-height for readability */
+    color: #555;
+    margin-bottom: 1.2em; /* Add space between paragraphs */
+}
+.chapter-content blockquote {
+    font-style: italic;
+    color: #777;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid #d4c5a3; /* More subtle border */
+    margin: 1.5rem 0;
+    background-color: #fbfaf8; /* Slightly different background to stand out */
+    border-radius: 0 4px 4px 0;
+}
+
+/* Style for enriched content keywords */
+.chapter-content strong {
+    color: var(--suntzu-accent-color);
+    font-weight: 600;
+}
+
+.chapter-content.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.chapter-content.fading-out {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chapter-content h3 {
+    font-size: 2rem;
+    color: var(--suntzu-primary-color);
+    margin-bottom: 1rem;
+}
+.chapter-content h4 {
+    font-size: 1.2rem;
+    color: var(--suntzu-secondary-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--suntzu-accent-color);
+    padding-left: 10px;
+}
+
+/* --- Module 3: Case Studies --- */
+.case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.case-card {
+    background-color: transparent;
+    aspect-ratio: 4 / 3;
+    perspective: 1000px;
+    cursor: pointer;
+    /* Reset button styles */
+    border: none;
+    padding: 0;
+    font: inherit;
+    text-align: inherit;
+}
+
+.case-card:focus-visible {
+    outline: 3px solid var(--suntzu-accent-color);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-main);
+}
+
+.card-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+.case-card:hover .card-flipper, .case-card.flipped .card-flipper {
+    transform: rotateY(180deg);
+}
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius-main);
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.card-front {
+    color: white;
+}
+.card-front .card-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+.case-card:hover .card-bg {
+    transform: scale(1.1);
+}
+.card-front h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: #fff;
+    font-size: 1.5rem;
+}
+.card-back {
+    background-color: #fff;
+    color: var(--suntzu-secondary-color);
+    transform: rotateY(180deg);
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+.card-back h4 {
+    color: var(--suntzu-primary-color);
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+.card-back p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/* --- Module 4: Timeline --- */
+/* NEW "BAMBOO SCROLL" STYLE */
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 50px; /* Space for the scroll axis */
+}
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 6px; /* A thicker, more scroll-like axis */
+    background: linear-gradient(to bottom, #8a705a, #a8907a, #8a705a); /* Wood texture gradient */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    top: 0;
+    bottom: 0;
+    left: 15px; /* Position on the left */
+    margin-left: 0;
+    transform-origin: top;
+    transition: transform 0.8s ease-out;
+    transform: scaleY(0);
+}
+
+.timeline-item {
+    padding: 20px 0 20px 40px; /* Adjust padding for the new layout */
+    position: relative;
+    width: 100%; /* Full width for single-sided layout */
+    opacity: 0; /* Initial state for animation */
+    transform: scaleX(0.9); /* Unfurling animation */
+    transform-origin: left; /* Animate from the axis */
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#suntzu-timeline.is-visible .timeline-container::after {
+    transform: scaleY(1);
+}
+
+#suntzu-timeline .timeline-item.is-visible {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Remove alternating rule */
+.timeline-item:nth-child(even) {
+    left: 0;
+}
+
+/* Restyle the marker to be a "seal" */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 9px; /* Position over the axis */
+    background-color: var(--suntzu-accent-color);
+    border: 2px solid #fff;
+    top: 25px;
+    border-radius: 2px; /* A slightly rounded square for the seal */
+    z-index: 1;
+    box-shadow: 0 0 5px rgba(200, 75, 49, 0.7);
+}
+/* Remove alternating marker rule */
+.timeline-item:nth-child(even)::after {
+    left: 9px;
+}
+
+.timeline-content {
+    padding: 20px 30px;
+    background-color: #fcfaf5; /* Paper-like background */
+    border: 1px solid #e0d9cd;
+    position: relative;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    opacity: 1 !important; /* CRITICAL FIX: Override global styles to ensure content is always visible */
+}
+
+/* Ensure all text is left-aligned */
+.timeline-item:nth-child(odd) .timeline-content,
+.timeline-item:nth-child(even) .timeline-content {
+    text-align: left;
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    color: var(--suntzu-primary-color);
+    font-size: 1.4rem;
+}
+.timeline-content p {
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* --- Module 5: Quiz --- */
+#suntzu-quiz {
+    padding-bottom: 4rem;
+}
+#quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+#quiz-main-content.hidden, #quiz-results.hidden, #start-quiz-btn.hidden, #quiz-next-btn.hidden {
+    display: none;
+}
+#quiz-question {
+    font-size: 1.5rem;
+    color: var(--suntzu-secondary-color);
+    margin: 1rem 0 2rem;
+}
+#quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.quiz-option-btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: var(--suntzu-bg-color);
+    border: 2px solid var(--suntzu-primary-color);
+    color: var(--suntzu-primary-color);
+    border-radius: var(--border-radius-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.quiz-option-btn:hover:not(:disabled) {
+    background-color: var(--suntzu-primary-color);
+    color: #fff;
+}
+.quiz-option-btn.correct {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+.quiz-option-btn.incorrect {
+    background-color: var(--suntzu-accent-color);
+    color: white;
+    border-color: var(--suntzu-accent-color);
+}
+.quiz-option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+#quiz-feedback {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+#start-quiz-btn, #quiz-next-btn, #restart-quiz-btn {
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    background-color: var(--suntzu-primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-main);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#start-quiz-btn:hover, #quiz-next-btn:hover, #restart-quiz-btn:hover {
+    background-color: var(--suntzu-secondary-color);
+}
+#quiz-result-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #suntzu-main h2 {
+        font-size: 2.2rem;
+    }
+    #suntzu-hero .hero-title {
+        font-size: 3rem;
+    }
+    .bamboo-scroll-wrapper {
+        width: 100%;
+    }
+    .scroll-arrow {
+        display: none; /* On mobile, rely on touch swipe */
+    }
+    .timeline-container::after {
+        left: 31px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+    .timeline-item::after {
+        left: 21px;
+    }
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        text-align: left;
+    }
+} 

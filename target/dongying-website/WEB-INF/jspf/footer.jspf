@@ -1,0 +1,12 @@
+<%@ page pageEncoding="UTF-8" %>
+<footer class="main-footer">
+    <p>&copy; 东营介绍 </p>
+</footer>
+
+<%-- We include icons here, right before the closing body tag --%>
+<jsp:include page="/WEB-INF/jspf/icons.jspf" />
+
+<script src="${pageContext.request.contextPath}/js/app.js"></script>
+
+</body>
+</html> 

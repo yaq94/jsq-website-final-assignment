@@ -1,0 +1,18 @@
+<%@ page pageEncoding="UTF-8" %>
+<% String requestUri = request.getRequestURI(); %>
+<header class="main-header">
+    <nav class="nav-bar">
+        <div class="nav-logo">
+            <a href="${pageContext.request.contextPath}/">东营</a>
+        </div>
+        <ul class="nav-links">
+            <li class="<%= requestUri.endsWith("/") || requestUri.endsWith("index.jsp") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/">首页</a></li>
+            <li class="<%= requestUri.endsWith("estuary.jsp") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/estuary.jsp">黄河入海</a></li>
+            <li class="<%= requestUri.endsWith("suntzu.jsp") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/suntzu.jsp">孙子故里</a></li>
+            <li class="<%= requestUri.endsWith("oilcity.jsp") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/oilcity.jsp">石油之城</a></li>
+            <li class="<%= requestUri.endsWith("wetland.jsp") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/wetland.jsp">湿地生态</a></li>
+            <li class="<%= requestUri.endsWith("cuisine.jsp") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/cuisine.jsp">东营美食</a></li>
+            <li class="<%= requestUri.contains("guestbook") ? "active" : "" %>"><a href="${pageContext.request.contextPath}/guestbook">在线留言</a></li>
+        </ul>
+    </nav>
+</header> 

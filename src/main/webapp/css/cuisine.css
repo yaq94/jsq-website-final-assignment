@@ -1,0 +1,268 @@
+/* === GOOGLE FONTS (Optional, for more elegant typography) === */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Zhi+Mang+Xing&display=swap');
+
+/* === VARIABLES & GLOBAL STYLES === */
+:root {
+    --cuisine-bg: #FDFDFD;
+    --cuisine-text: #333;
+    --cuisine-primary: #B0A47F; /* A soft, elegant gold/khaki */
+    --cuisine-secondary: #6B5B3E; /* A darker, stable brown */
+    --cuisine-accent: #D44D5C; /* A gentle, inviting red for accents */
+    --cuisine-subtle-bg: #F5F5F5; /* For backgrounds of interactive elements */
+
+    --font-serif: 'Noto Serif SC', serif;
+    --font-handwriting: 'Zhi Mang Xing', cursive;
+}
+
+body.cuisine-theme {
+    background-color: var(--cuisine-bg);
+    color: var(--cuisine-text);
+    font-family: var(--font-serif);
+}
+
+/* === PAGE WRAPPER & LAYOUT === */
+.cuisine-page-wrapper {
+    overflow-x: hidden;
+}
+
+/* === MODULE 1: HERO === */
+.cuisine-hero {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1556909172-6ab63f18fd12?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.hero-content {
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero-title {
+    font-family: var(--font-handwriting);
+    font-size: 8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.hero-scroll-prompt {
+    margin-top: 4rem;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    animation: bounce 2s infinite;
+}
+
+
+/* === MAIN CONTENT LAYOUT === */
+.cuisine-main-content {
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    margin: 5rem auto;
+    position: relative;
+}
+
+/* === MODULE 2: FLAVOR COMPASS === */
+.flavor-compass {
+    position: sticky;
+    top: 100px;
+    width: 200px;
+    height: calc(100vh - 120px);
+    flex-shrink: 0;
+    margin-right: 4rem;
+}
+
+.flavor-compass nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid var(--cuisine-subtle-bg);
+}
+
+.flavor-compass li {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.flavor-compass li:before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 0;
+    width: 2px;
+    background-color: var(--cuisine-primary);
+    transition: height 0.3s ease;
+}
+
+.flavor-compass li:hover, .flavor-compass li.active {
+    background-color: var(--cuisine-subtle-bg);
+    color: var(--cuisine-secondary);
+}
+
+.flavor-compass li.active:before {
+    height: 100%;
+}
+
+.compass-icon {
+    font-size: 1.5rem;
+}
+
+.compass-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* === MODULE 3: CULINARY SCROLL === */
+.culinary-scroll {
+    width: 100%;
+}
+
+.culinary-chapter {
+    padding: 5rem 0;
+    border-bottom: 1px solid #eee;
+    opacity: 0.2; /* Will be faded in by JS */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.culinary-chapter:last-child {
+    border-bottom: none;
+}
+
+.culinary-chapter.visible {
+    opacity: 1;
+}
+
+.chapter-main-title {
+    font-family: var(--font-handwriting);
+    font-size: 4rem;
+    color: var(--cuisine-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.chapter-subtitle {
+    font-size: 1.5rem;
+    color: var(--cuisine-primary);
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.chapter-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.chapter-visual {
+    position: sticky;
+    top: 120px;
+}
+
+.chapter-visual img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.chapter-story h3 {
+    font-size: 1.8rem;
+    color: var(--cuisine-secondary);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--cuisine-primary);
+    display: inline-block;
+}
+
+.chapter-story p {
+    line-height: 2;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+/* Recipe toggle button */
+.recipe-toggle {
+    display: inline-block;
+    background: var(--cuisine-subtle-bg);
+    color: var(--cuisine-secondary);
+    border: 1px solid #ddd;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.recipe-toggle:hover {
+    background: var(--cuisine-primary);
+    color: white;
+    border-color: var(--cuisine-primary);
+}
+
+.recipe-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out, padding 0.5s ease;
+    background: #fafafa;
+    padding: 0 2rem;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    margin-top: 1.5rem;
+}
+
+.recipe-content.open {
+    max-height: 1000px; /* Large enough value */
+    padding: 2rem;
+}
+
+/* === KEYFRAMES === */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+} 
